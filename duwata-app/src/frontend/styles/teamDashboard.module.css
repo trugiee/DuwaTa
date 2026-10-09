@@ -1,0 +1,296 @@
+.headerBanner {
+  background: linear-gradient(135deg, rgba(var(--rgb-grad-1), 0.8), rgba(var(--rgb-grad-2), 0.9));
+  border: 1px solid rgba(var(--rgb-veil), 0.08);
+  border-radius: 16px;
+  padding: 1.75rem 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.teamIntro {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.teamLogoBig {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, rgb(var(--rgb-btn-a)), rgb(var(--rgb-btn-b)));
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--text-on-fill);
+}
+
+.teamNameBig {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0 0 0.25rem;
+}
+
+.managerMeta {
+  color: var(--text-tertiary);
+  font-size: 0.875rem;
+}
+
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.statCard {
+  background: var(--bg-section);
+  border: 1px solid rgba(var(--rgb-veil), 0.08);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.statIconWrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: rgba(var(--rgb-veil), 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+
+.statInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.statValue {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.statLabel {
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
+  font-weight: 500;
+  margin-top: 0.2rem;
+}
+
+.cardSection {
+  background: var(--bg-section);
+  border: 1px solid rgba(var(--rgb-veil), 0.08);
+  border-radius: 14px;
+  padding: 1.75rem;
+  margin-bottom: 2rem;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.sectionHeading {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.viewAllLink {
+  color: var(--accent-color, #bebebe);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.viewAllLink:hover {
+  text-decoration: underline;
+}
+
+.tableWrap {
+  overflow-x: auto;
+}
+
+.modernTable {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.modernTable th {
+  padding: 0.75rem 1rem;
+  background: rgba(var(--rgb-grad-2), 0.6);
+  color: var(--text-tertiary);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid rgba(var(--rgb-veil), 0.08);
+}
+
+.modernTable td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid rgba(var(--rgb-veil), 0.04);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+}
+
+.statusPill {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+
+.statusPending {
+  background: rgba(var(--rgb-tint), 0.15);
+  color: var(--text-secondary);
+  border: 1px solid rgba(var(--rgb-line), 0.3);
+}
+
+.statusApproved {
+  background: rgba(var(--rgb-tint-2), 0.15);
+  color: var(--text-tertiary);
+  border: 1px solid rgba(var(--rgb-line), 0.3);
+}
+
+.statusRejected {
+  background: rgba(var(--rgb-tint-3), 0.15);
+  color: var(--text-tertiary);
+  border: 1px solid rgba(var(--rgb-line), 0.3);
+}
+
+.actionBtn {
+  background: linear-gradient(135deg, rgb(var(--rgb-btn-a)), rgb(var(--rgb-btn-b)));
+  color: var(--text-on-fill);
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.actionBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(var(--rgb-line), 0.3);
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.formLabel {
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.formInput {
+  background: rgba(var(--rgb-grad-2), 0.6);
+  border: 1px solid rgba(var(--rgb-veil), 0.1);
+  padding: 0.65rem 0.85rem;
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.formInput:focus {
+  border-color: var(--accent-color, #bebebe);
+}
+
+.saveBtn {
+  background: linear-gradient(135deg, rgb(var(--rgb-btn-a)), rgb(var(--rgb-btn-b)));
+  color: var(--text-on-fill);
+  font-weight: 700;
+  padding: 0.7rem 1.75rem;
+  border-radius: 8px;
+  border: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.saveBtn:hover {
+  box-shadow: 0 4px 14px rgba(var(--rgb-line), 0.3);
+}
+
+.dangerBtn {
+  background: rgba(var(--rgb-tint-3), 0.1);
+  border: 1px solid rgba(var(--rgb-line), 0.2);
+  color: var(--text-tertiary);
+  font-weight: 600;
+  padding: 0.35rem 0.65rem;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+.dangerBtn:hover {
+  background: rgba(var(--rgb-tint-3), 0.2);
+}
+
+@media (max-width: 768px) {
+  .headerBanner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.25rem;
+  }
+
+  .teamIntro {
+    flex-wrap: wrap;
+    gap: 0.85rem;
+  }
+
+  .cardSection {
+    padding: 1rem;
+  }
+
+  .statCard {
+    padding: 1rem;
+    gap: 0.85rem;
+  }
+
+  .sectionHeader {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .modernTable {
+    min-width: 620px;
+  }
+}

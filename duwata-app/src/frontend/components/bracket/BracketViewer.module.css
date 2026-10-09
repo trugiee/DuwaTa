@@ -1,0 +1,240 @@
+.bracketContainer {
+  width: 100%;
+  overflow-x: auto;
+  padding: 1.5rem 0.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(var(--rgb-veil), 0.2) transparent;
+}
+
+.emptyBracket {
+  padding: 4rem 2rem;
+  text-align: center;
+  background: rgba(var(--rgb-grad-1), 0.5);
+  border: 1px dashed var(--border-color);
+  border-radius: 16px;
+  color: var(--text-secondary);
+}
+
+.emptyIcon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.roundsTrack {
+  display: flex;
+  gap: 2.5rem;
+  min-width: max-content;
+  align-items: stretch;
+}
+
+.roundColumn {
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+}
+
+.roundHeader {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid rgba(var(--rgb-veil), 0.08);
+}
+
+.roundBadge {
+  display: inline-block;
+  background: rgba(var(--rgb-tint), 0.15);
+  color: var(--accent-color, #bebebe);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  margin-bottom: 0.25rem;
+}
+
+.roundTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0.25rem 0;
+}
+
+.roundCount {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.matchesList {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex: 1;
+  gap: 1.5rem;
+}
+
+.matchCard {
+  background: var(--bg-card, #282828);
+  border: 1px solid var(--border-color, #3f3f3f);
+  border-radius: 12px;
+  padding: 0.85rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.clickableCard {
+  cursor: pointer;
+}
+
+.clickableCard:hover {
+  border-color: var(--accent-color, #bebebe);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(var(--rgb-line), 0.15);
+}
+
+.liveCard {
+  border-color: var(--border-color-hover);
+  box-shadow: 0 0 12px rgba(var(--rgb-line), 0.3);
+}
+
+.matchMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.6rem;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.matchNum {
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.matchCourt {
+  background: rgba(var(--rgb-veil), 0.05);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+}
+
+.liveBadge {
+  background: var(--bg-badge);
+  color: white;
+  font-weight: 800;
+  font-size: 0.65rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  animation: liveBlink 1.5s infinite;
+}
+
+@keyframes liveBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.completedBadge {
+  background: rgba(var(--rgb-veil), 0.1);
+  color: var(--text-tertiary);
+  font-size: 0.65rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+}
+
+.matchTeams {
+  display: flex;
+  flex-direction: column;
+}
+
+.teamRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.4rem 0.5rem;
+  border-radius: 6px;
+  transition: background 0.15s ease;
+}
+
+.winnerRow {
+  background: rgba(var(--rgb-tint), 0.1);
+}
+
+.winnerRow .teamName {
+  font-weight: 700;
+  color: var(--text-tertiary);
+}
+
+.winnerRow .score {
+  color: var(--text-tertiary);
+  font-weight: 800;
+}
+
+.teamInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  overflow: hidden;
+}
+
+.teamAvatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(var(--rgb-veil), 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.teamName {
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 170px;
+}
+
+.score {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  padding-left: 0.5rem;
+}
+
+.teamDivider {
+  height: 1px;
+  background: rgba(var(--rgb-veil), 0.05);
+  margin: 0.2rem 0;
+}
+
+.adminActionHint {
+  margin-top: 0.5rem;
+  padding-top: 0.4rem;
+  border-top: 1px dashed rgba(var(--rgb-veil), 0.08);
+  font-size: 0.7rem;
+  color: var(--accent-color, #bebebe);
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .bracketContainer {
+    padding: 1rem 0.25rem;
+  }
+
+  .roundsTrack {
+    gap: 1.25rem;
+  }
+
+  .roundColumn {
+    width: 240px;
+    flex-shrink: 0;
+  }
+
+  .emptyBracket {
+    padding: 2rem 1rem;
+  }
+}

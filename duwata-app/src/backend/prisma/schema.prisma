@@ -1,0 +1,191 @@
+// DuwaTa - Pickleball Tournament Organizer
+// Database Schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// USERS - Authentication accounts
+// Roles: admin, team
+// ============================================
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String?
+  role      Role     @default(TEAM)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  team Team?
+
+  @@map("users")
+}
+
+enum Role {
+  ADMIN
+  TEAM
+}
+
+// ============================================
+// TEAMS - One user = One team
+// ============================================
+model Team {
+  id          String  @id @default(cuid())
+  userId      String  @unique @map("user_id")
+  teamName    String  @map("team_name")
+  logo        String?
+  managerName String  @map("manager_name")
+  phone       String?
+  location    String?
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  players       Player[]
+  registrations Registration[]
+  matchesAsA    Match[]        @relation("TeamA")
+  matchesAsB    Match[]        @relation("TeamB")
+  matchesWon    Match[]        @relation("MatchWinner")
+
+  @@map("teams")
+}
+
+// ============================================
+// PLAYERS - Members of a team (no accounts)
+// ============================================
+model Player {
+  id        String   @id @default(cuid())
+  teamId    String   @map("team_id")
+  firstName String   @map("first_name")
+  lastName  String   @map("last_name")
+  gender    Gender
+  birthDate DateTime @map("birth_date")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  team Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
+
+  @@map("players")
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+// ============================================
+// TOURNAMENTS - Created and managed by admin
+// ============================================
+model Tournament {
+  id                   String           @id @default(cuid())
+  name                 String
+  description          String?
+  location             String
+  startDate            DateTime         @map("start_date")
+  endDate              DateTime         @map("end_date")
+  registrationDeadline DateTime         @map("registration_deadline")
+  status               TournamentStatus @default(DRAFT)
+  createdAt            DateTime         @default(now()) @map("created_at")
+  updatedAt            DateTime         @updatedAt @map("updated_at")
+
+  categories    Category[]
+  registrations Registration[]
+  matches       Match[]
+
+  @@map("tournaments")
+}
+
+enum TournamentStatus {
+  DRAFT
+  OPEN
+  CLOSED
+  ONGOING
+  COMPLETED
+}
+
+// ============================================
+// CATEGORIES - Tournament categories
+// ============================================
+model Category {
+  id           String @id @default(cuid())
+  tournamentId String @map("tournament_id")
+  name         String
+
+  tournament    Tournament     @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+  registrations Registration[]
+  matches       Match[]
+
+  @@map("categories")
+}
+
+// ============================================
+// REGISTRATIONS - Team registers for tournament
+// ============================================
+model Registration {
+  id           String             @id @default(cuid())
+  tournamentId String             @map("tournament_id")
+  categoryId   String             @map("category_id")
+  teamId       String             @map("team_id")
+  status       RegistrationStatus @default(PENDING)
+  createdAt    DateTime           @default(now()) @map("created_at")
+  updatedAt    DateTime           @updatedAt @map("updated_at")
+
+  tournament Tournament @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+  category   Category   @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  team       Team       @relation(fields: [teamId], references: [id], onDelete: Cascade)
+
+  @@unique([tournamentId, categoryId, teamId])
+  @@map("registrations")
+}
+
+enum RegistrationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+// ============================================
+// MATCHES - Tournament matches
+// ============================================
+model Match {
+  id           String      @id @default(cuid())
+  tournamentId String      @map("tournament_id")
+  categoryId   String      @map("category_id")
+  round        Int
+  matchNumber  Int         @map("match_number")
+  teamAId      String?     @map("team_a_id")
+  teamBId      String?     @map("team_b_id")
+  scoreA       Int?        @map("score_a")
+  scoreB       Int?        @map("score_b")
+  court        String?
+  scheduledAt  DateTime?   @map("scheduled_at")
+  status       MatchStatus @default(SCHEDULED)
+  winnerTeamId String?     @map("winner_team_id")
+  nextMatchId  String?     @map("next_match_id")
+  nextMatchSlot String?    @map("next_match_slot") // "A" or "B" - which slot in the next match
+  createdAt    DateTime    @default(now()) @map("created_at")
+  updatedAt    DateTime    @updatedAt @map("updated_at")
+
+  tournament  Tournament @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+  category    Category   @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  teamA       Team?      @relation("TeamA", fields: [teamAId], references: [id])
+  teamB       Team?      @relation("TeamB", fields: [teamBId], references: [id])
+  winnerTeam  Team?      @relation("MatchWinner", fields: [winnerTeamId], references: [id])
+  nextMatch   Match?     @relation("BracketProgression", fields: [nextMatchId], references: [id])
+  prevMatches Match[]    @relation("BracketProgression")
+
+  @@map("matches")
+}
+
+enum MatchStatus {
+  SCHEDULED
+  ONGOING
+  COMPLETED
+}
